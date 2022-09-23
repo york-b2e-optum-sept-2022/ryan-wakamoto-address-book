@@ -1,0 +1,18 @@
+<app-login
+  *ngIf="isLoggedIn === false"
+  (onLogin)="onLogin($event)">
+</app-login>
+<app-contact-input
+  *ngIf="createContact === false"
+  (contactToOutput)="onSave($event)"
+></app-contact-input>
+
+<app-contact-list
+  *ngIf="isLoggedIn === true || createContact === false"
+  [contactList]="contactList"
+  (onCreateList)="onCreate($event)"
+  (onBackClicked)="onBack($event)"
+></app-contact-list>
+
+<!--<app-contact></app-contact>-->
+<!--<app-contact-list></app-contact-list>-->

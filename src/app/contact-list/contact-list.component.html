@@ -1,0 +1,9 @@
+<button (click)="onCreate($event)" *ngIf="clickedCreate === true">Create Contact List</button>
+<button (click)="onBackClick()" *ngIf="clickedCreate === false">Back</button>
+<input>
+<div class="contact-list">
+  <app-contact
+    *ngFor="let contactData of contactList"
+    [contact]="contactData"
+  ></app-contact>
+</div>
