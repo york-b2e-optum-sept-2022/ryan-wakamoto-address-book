@@ -9,9 +9,12 @@ import {IContact} from "../interfaces/iContact";
 export class ContactInputComponent implements OnInit {
 
   @Output() contactToOutput: EventEmitter<IContact> = new EventEmitter<IContact>();
-  // @Output() newContact = new EventEmitter<IContact>;
+  @Output() backClicked = new EventEmitter<undefined>();
 
+  date = new Date('en-US');
+  changeFormat = this.date.transform(this.today, 'dd/MM/YYY');
 
+  // give values, without the equals, it will give undefined
   contact: IContact = {
     id: 0,
     name: '',
@@ -35,5 +38,9 @@ export class ContactInputComponent implements OnInit {
     this.contactToOutput.emit(this.contact)
   }
 
+  onBack() {
+    this.backClicked.emit()
+    console.log('back clicked')
+  }
 
 }

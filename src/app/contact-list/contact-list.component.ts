@@ -10,26 +10,17 @@ import {IAccount} from "../interfaces/iaccount";
 export class ContactListComponent implements OnInit {
 
   @Input() contactList!: IContact[];
-  @Output() onCreateList = new EventEmitter<boolean>;
-  @Output() onBackClicked = new EventEmitter<boolean>;
+  @Output() deleteContact = new EventEmitter<any>();
 
-  clickedCreate: boolean = true;
+  localContact!: IContact[];
+
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.contactList)
   }
 
-// gets rid of create button to replace with Back Button
-  onCreate(event: any) {
-    this.onCreateList.emit(
-      this.clickedCreate = false
-    )
-  }
-
-  // gets rid of Back button to replace with Create Button
-  onBackClick(){
-    this.onBackClicked.emit(
-      this.clickedCreate = true
-    )
+  onDelete(contact: IContact){
+    this.deleteContact.emit(contact)
   }
 }

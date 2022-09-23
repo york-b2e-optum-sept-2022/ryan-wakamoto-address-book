@@ -7,6 +7,8 @@ import { ContactComponent } from './contact/contact.component';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import {FormsModule} from "@angular/forms";
 import { ContactInputComponent } from './contact-input/contact-input.component';
+import { CreateContactComponent } from './create-contact/create-contact.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { ContactInputComponent } from './contact-input/contact-input.component';
     LoginComponent,
     ContactComponent,
     ContactListComponent,
-    ContactInputComponent
+    ContactInputComponent,
+    CreateContactComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

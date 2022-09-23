@@ -1,12 +1,40 @@
 
+<label>
+  Name:
   <input placeholder="name" [(ngModel)]="contact.name">
+</label>
+<label>
+  Address:
   <input placeholder="address" [(ngModel)]="contact.address">
+</label>
+<label>
+  Phone Number:
   <input placeholder="phone number" [(ngModel)]="contact.phoneNumber">
+</label>
+<label>
+  Email:
   <input placeholder="email" [(ngModel)]="contact.email">
+</label>
+<label>
+  Birthday:
   <input placeholder="birthday" type="date" [(ngModel)]="contact.birthday">
+</label>
+<label>
+  Meeting Date:
   <input placeholder="date met" type="date" [(ngModel)]="contact.dateMet">
+</label>
+<label>
+  Relation:
   <input placeholder="relation" [(ngModel)]="contact.relation">
+</label>
+<label>
+  Company:
   <input placeholder="company" [(ngModel)]="contact.company">
+</label>
+<label>
+  Notes:
   <input placeholder="notes" [(ngModel)]="contact.notes">
+</label>
   <button (click)="onSave()">Save</button>
+  <button (click)="onBack()">Back</button>
 

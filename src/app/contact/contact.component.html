@@ -1,4 +1,4 @@
-<div class="class">
+<div class="class" *ngIf="isUpdating === false">
   <div>Name:{{contact.name}}</div>
   <div>Address:{{contact.address}}</div>
   <div>Phone Number: {{contact.phoneNumber}}</div>
@@ -9,9 +9,51 @@
   <div>Company:{{contact.company}}</div>
   <div>Notes: {{contact.notes}}</div>
   <div>Date Created: {{contact.date}}</div>
-  <button (click)="onUpdateClick()">Update</button>
-  <button (click)="onSave()">Save</button>
+  <div *ngIf="wasUpdated === true">Date Edited: {{contact.date}}</div>
+  <button (click)="onUpdateClick()" *ngIf="isUpdating === false">Update</button>
   <button (click)="onDelete()">Delete</button>
+</div>
+
+<div class="class" *ngIf="isUpdating === true">
+  <label>Name:
+    <input [(ngModel)]="contact.name">
+  </label>
+  <br>
+  <label>Address:
+    <input [(ngModel)]="contact.address">
+  </label>
+  <br>
+  <label>Phone Number:
+    <input [(ngModel)]="contact.phoneNumber">
+  </label>
+  <br>
+  <label>Email:
+    <input [(ngModel)]="contact.email">
+  </label>
+  <br>
+  <label>Birthday:
+    <input type="date" [(ngModel)]="contact.birthday">
+  </label>
+  <br>
+  <label>Date Met:
+    <input type="date"[(ngModel)]="contact.dateMet">
+  </label>
+  <br>
+  <label>Relation:
+    <input [(ngModel)]="contact.relation">
+  </label>
+  <br>
+  <label>Company:
+    <input [(ngModel)]="contact.company">
+  </label>
+  <br>
+  <label>Notes:
+    <input [(ngModel)]="contact.notes">
+  </label>
+  <br>
+  <div>Date Edited: {{contact.date}}</div>
+  <button (click)="onSave()">Save</button>
+  <button (click)="onCancel()">Cancel</button>
 </div>
 
 

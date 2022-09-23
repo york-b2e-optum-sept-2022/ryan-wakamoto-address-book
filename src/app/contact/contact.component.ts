@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IContact} from "../interfaces/iContact";
 
 @Component({
@@ -10,27 +10,37 @@ export class ContactComponent implements OnInit {
 
   @Input() contact!: IContact;
 
-  localContact!: IContact
+  @Output() deleteClicked = new EventEmitter<IContact>();
+
+  localContact!: IContact;
   isUpdating: boolean = false;
+  wasUpdated: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
     this.localContact = {...this.contact}
-    console.log(this.localContact)
   }
 
   onDelete() {
-    // this.onDelete.emit(this.contact)
+    this.deleteClicked.emit(this.contact)
   }
 
   onUpdateClick() {
     this.isUpdating = true;
+
   }
 
   onSave() {
     this.isUpdating = false;
-    this.contact = this.localContact
+    this.wasUpdated = true;
+    this.localContact = {...this.contact}
+    console.log(this.localContact)
   }
 
+  onCancel() {
+    this.isUpdating = false;
+    this.contact = {...this.localContact}
+    console.log(this.contact)
+  }
 }

@@ -10,8 +10,8 @@ import {IContact} from "./interfaces/iContact";
 export class AppComponent {
   title = 'address-book';
 
-  createContact: boolean = true;
-  isLoggedIn: boolean = false;
+  createContact: boolean = false;
+  isLoggedIn: boolean = true;
 
   accountList: IAccount[] = [
     {username: 'admin', password: 'admin'}
@@ -44,6 +44,10 @@ export class AppComponent {
     // }
   ]
 
+  deleteContact = {...this.contactList}
+
+  // localContact = this.contactList
+
   onLogin(loginCreds: IAccount) {
     const foundAccount = this.accountList.find((account) => {
       return account.username === loginCreds.username &&
@@ -55,22 +59,15 @@ export class AppComponent {
       alert('Invalid Login')
       return;
     }
-
     this.isLoggedIn = true;
-    // console.log(foundAccount)
   }
 
-  onCreate(event: boolean){
-    if (event === false) {
-      this.createContact = false;
-    }
+  createClicked(event: any){
+    this.createContact = true
   }
 
-  onBack(event: boolean){
-    if (event === true) {
-      this.createContact = true;
-    }
-    console.log(this.createContact)
+  onBack(event: any){
+    this.createContact = false
   }
 
   onSave(input: any){
@@ -89,7 +86,13 @@ export class AppComponent {
       date: input.date,
     }
     this.contactList.push(contact)
-    console.log(contact)
+  }
+
+  onDelete(contactToDelete: IContact) {
+    // console.log(contactToDelete)
+    // console.log(this.contactList)
+    this.contactList = this.contactList.filter(contact => contact.id !== contactToDelete.id)
+    // console.log(this.contactList)
   }
 
 
