@@ -1,1 +1,8 @@
-<p>search works!</p>
+<input [(ngModel)]="searchInput">
+<button (click)="onSearch(searchInput)">Search</button>
+
+<select (change)="onFilterChange($event)">
+  <option value="recentlyCreated">Recently Created</option>
+  <option value="alphaAscend">Alphabetical by Name Ascending</option>
+  <option value="alphaDescend">Alphabetical by Name Descending</option>
+</select>

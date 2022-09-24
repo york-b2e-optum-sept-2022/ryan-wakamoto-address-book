@@ -10,15 +10,21 @@
     (createClicked)="createClicked($event)"
   ></app-create-contact>
 
+  <app-search
+    (searchClicked)="searchInput($event)"
+  ></app-search>
+
   <app-contact-input
     *ngIf="createContact === true"
     (contactToOutput)="onSave($event)"
     (backClicked)="onBack($event)"
   ></app-contact-input>
 
+
   <app-contact-list
     [contactList]="contactList"
     (deleteContact)="onDelete($event)"
+    [filterPicked]="filterPicked"
   ></app-contact-list>
 </div>
 

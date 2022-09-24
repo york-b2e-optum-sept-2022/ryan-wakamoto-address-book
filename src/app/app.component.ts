@@ -5,7 +5,7 @@ import {IContact} from "./interfaces/iContact";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'address-book';
@@ -28,7 +28,8 @@ export class AppComponent {
     //   email: 'rw@gmail.com',
     //   notes: 'cool person',
     //   phoneNumber: '310-123-4567',
-    //   relation: 'co-worker'
+    //   relation: 'co-worker',
+    //   date: new Date()
     // },
     // {
     //   id: 0,
@@ -40,18 +41,17 @@ export class AppComponent {
     //   email: 'rw@gmail.com',
     //   notes: 'cool person',
     //   phoneNumber: '310-123-4567',
-    //   relation: 'co-worker'
+    //   relation: 'co-worker',
+    //   date: new Date()
     // }
   ]
 
-  deleteContact = {...this.contactList}
-
-  // localContact = this.contactList
+  filterPicked: string = ''
 
   onLogin(loginCreds: IAccount) {
     const foundAccount = this.accountList.find((account) => {
       return account.username === loginCreds.username &&
-      account.password === loginCreds.password
+        account.password === loginCreds.password
     })
 
     if (foundAccount === undefined) {
@@ -62,15 +62,15 @@ export class AppComponent {
     this.isLoggedIn = true;
   }
 
-  createClicked(event: any){
+  createClicked(event: any) {
     this.createContact = true
   }
 
-  onBack(event: any){
+  onBack(event: any) {
     this.createContact = false
   }
 
-  onSave(input: any){
+  onSave(input: any) {
     const currentDate = new Date();
     const contact: IContact = {
       id: currentDate.getTime(),
@@ -90,11 +90,21 @@ export class AppComponent {
 
   onDelete(contactToDelete: IContact) {
     // console.log(contactToDelete)
-    // console.log(this.contactList)
+    console.log(this.contactList)
     this.contactList = this.contactList.filter(contact => contact.id !== contactToDelete.id)
     // console.log(this.contactList)
   }
 
 
-
+  searchInput(event: any) {
+    // console.log(event)
+    const list = this.contactList
+    // console.log(list)
+    for (const objList of this.contactList) {
+      if (objList.name === event) {
+        console.log('name matches')
+        this.contactList = this.contactList.filter(contact => contact.name === event)
+      }
+    }
+  }
 }

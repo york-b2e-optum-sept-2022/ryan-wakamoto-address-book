@@ -11,8 +11,8 @@ export class ContactListComponent implements OnInit {
 
   @Input() contactList!: IContact[];
   @Output() deleteContact = new EventEmitter<any>();
+  @Input() filterPicked!: string;
 
-  localContact!: IContact[];
 
   constructor() { }
 
@@ -23,4 +23,6 @@ export class ContactListComponent implements OnInit {
   onDelete(contact: IContact){
     this.deleteContact.emit(contact)
   }
+
+
 }

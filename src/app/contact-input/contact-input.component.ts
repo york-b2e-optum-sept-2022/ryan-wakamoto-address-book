@@ -11,8 +11,6 @@ export class ContactInputComponent implements OnInit {
   @Output() contactToOutput: EventEmitter<IContact> = new EventEmitter<IContact>();
   @Output() backClicked = new EventEmitter<undefined>();
 
-  date = new Date('en-US');
-  changeFormat = this.date.transform(this.today, 'dd/MM/YYY');
 
   // give values, without the equals, it will give undefined
   contact: IContact = {

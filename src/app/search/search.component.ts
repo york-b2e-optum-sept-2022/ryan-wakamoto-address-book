@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {IContact} from "../interfaces/iContact";
 
 @Component({
   selector: 'app-search',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
+  @Output() filterPicked = new EventEmitter<string>();
+  @Output() searchClicked = new EventEmitter<any>();
+
+  searchInput: string = '';
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  onSearch(input: string){
+    // console.log(input)
+    this.searchClicked.emit(input)
+
+    }
+
+  onFilterChange(event: any){
+    // console.log(event.target.value)
+    this.filterPicked.emit(event.target.value)
+  }
+
+
 
 }
