@@ -17,35 +17,38 @@ export class AppComponent {
     {username: 'admin', password: 'admin'}
   ]
 
-  contactList: IContact[] = [
-    // {
-    //   id: 0,
-    //   name: 'Ryan',
-    //   address: '123 main st',
-    //   birthday: new Date(),
-    //   dateMet: new Date(),
-    //   company: 'york',
-    //   email: 'rw@gmail.com',
-    //   notes: 'cool person',
-    //   phoneNumber: '310-123-4567',
-    //   relation: 'co-worker',
-    //   date: new Date()
-    // },
-    // {
-    //   id: 0,
-    //   name: 'David',
-    //   address: '123 main st',
-    //   birthday: new Date(),
-    //   dateMet: new Date(),
-    //   company: 'york',
-    //   email: 'rw@gmail.com',
-    //   notes: 'cool person',
-    //   phoneNumber: '310-123-4567',
-    //   relation: 'co-worker',
-    //   date: new Date()
-    // }
-  ]
 
+  searchText: string = ''
+  contactList: IContact[] = [
+    {
+      id: 0,
+      name: 'Ryan',
+      address: '123 main st',
+      birthday: new Date(),
+      dateMet: new Date(),
+      company: 'york',
+      email: 'rw@gmail.com',
+      notes: 'cool person',
+      phoneNumber: '310-123-4567',
+      relation: 'co-worker',
+      date: new Date()
+    },
+    {
+      id: 1,
+      name: 'David',
+      address: '123 main st',
+      birthday: new Date(),
+      dateMet: new Date(),
+      company: 'york',
+      email: 'rw@gmail.com',
+      notes: 'cool person',
+      phoneNumber: '310-123-4567',
+      relation: 'co-worker',
+      date: new Date()
+    }
+  ]
+  localContact = this.contactList
+  contactFound: boolean = false;
   filterPicked: string = ''
 
   onLogin(loginCreds: IAccount) {
@@ -60,6 +63,7 @@ export class AppComponent {
       return;
     }
     this.isLoggedIn = true;
+    this.contactFound = false;
   }
 
   createClicked(event: any) {
@@ -93,18 +97,14 @@ export class AppComponent {
     console.log(this.contactList)
     this.contactList = this.contactList.filter(contact => contact.id !== contactToDelete.id)
     // console.log(this.contactList)
+    this.localContact = this.contactList
   }
 
-
   searchInput(event: any) {
-    // console.log(event)
-    const list = this.contactList
-    // console.log(list)
-    for (const objList of this.contactList) {
-      if (objList.name === event) {
-        console.log('name matches')
-        this.contactList = this.contactList.filter(contact => contact.name === event)
-      }
-    }
+    this.searchText = event
+    if (event !== ''){
+      this.contactList = this.localContact.filter(contact => contact.name.toLowerCase() === event)
+    } else if (event === '')
+      this.contactList = this.localContact
   }
 }

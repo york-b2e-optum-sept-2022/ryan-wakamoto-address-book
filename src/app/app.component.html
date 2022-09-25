@@ -22,10 +22,23 @@
 
 
   <app-contact-list
+    *ngIf="searchText === ''"
     [contactList]="contactList"
     (deleteContact)="onDelete($event)"
     [filterPicked]="filterPicked"
   ></app-contact-list>
+
+  <app-contact-list
+    *ngIf="searchText !== ''"
+    [contactList]="contactList"
+    (deleteContact)="onDelete($event)"
+    [filterPicked]="filterPicked"
+  ></app-contact-list>
+
+  <div *ngIf="this.contactList.length === 0">
+    Couldn't find name of {{searchText}} in contact list
+  </div>
+
 </div>
 
 
