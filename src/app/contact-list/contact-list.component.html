@@ -1,6 +1,12 @@
+<app-search
+  (searchInput)="searchInput($event)"
+></app-search>
+<div *ngIf="this.displayList.length === 0">
+  Couldn't find name of {{searchText}} in contact list
+</div>
 <div class="contact-list">
   <app-contact
-    *ngFor="let contactData of contactList"
+    *ngFor="let contactData of displayList"
     [contact]="contactData"
     (deleteClicked)="onDelete($event)"
   ></app-contact>

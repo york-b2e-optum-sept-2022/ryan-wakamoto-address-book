@@ -9,20 +9,18 @@ import {IContact} from "../interfaces/iContact";
 export class SearchComponent implements OnInit {
 
   @Output() filterPicked = new EventEmitter<string>();
-  @Output() searchClicked = new EventEmitter<any>();
+  @Output() searchInput = new EventEmitter<any>();
 
-  searchInput: string = '';
+  searchText: string = '';
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onSearch(input: string){
-    // console.log(input)
-    this.searchClicked.emit(input)
-
-    }
+  onSearch(searchText: string){
+    this.searchInput.emit(searchText)
+  }
 
   onFilterChange(event: any){
     // console.log(event.target.value)

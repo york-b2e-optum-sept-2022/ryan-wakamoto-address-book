@@ -1,5 +1,4 @@
-<input placeholder="search name" [(ngModel)]="searchInput">
-<button (click)="onSearch(searchInput)">Search</button>
+<input placeholder="search name" [ngModel]="searchText" (ngModelChange)="onSearch($event)">
 
 <select (change)="onFilterChange($event)">
   <option value="recentlyCreated">Recently Created</option>

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {IContact} from "../interfaces/iContact";
 import {IAccount} from "../interfaces/iaccount";
 
@@ -7,22 +7,34 @@ import {IAccount} from "../interfaces/iaccount";
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.css']
 })
-export class ContactListComponent implements OnInit {
+export class ContactListComponent implements OnInit, OnChanges {
 
-  @Input() contactList!: IContact[];
+  @Input() list!: IContact[];
   @Output() deleteContact = new EventEmitter<any>();
-  @Input() filterPicked!: string;
+  // @Input() filterPicked!: string;
 
+  displayList!: IContact[];
+  searchText: string = ''
+  foundText = true;
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.contactList)
+    this.displayList = [...this.list]
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.displayList = [...this.list]
   }
 
   onDelete(contact: IContact){
     this.deleteContact.emit(contact)
   }
 
-
+  searchInput(searchText: string) {
+    this.searchText = searchText
+    this.displayList = this.list.filter((contact) => {
+      return contact.name.includes(searchText);
+    })
+  }
 }

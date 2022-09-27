@@ -9,16 +9,16 @@ import {IContact} from "../interfaces/iContact";
 export class ContactComponent implements OnInit {
 
   @Input() contact!: IContact;
-
   @Output() deleteClicked = new EventEmitter<IContact>();
 
-  localContact!: IContact;
   isUpdating: boolean = false;
   wasUpdated: boolean = false;
+  localContact!: IContact;
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.contact)
     this.localContact = {...this.contact}
   }
 

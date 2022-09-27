@@ -8,32 +8,22 @@ import {IContact} from "../interfaces/iContact";
 })
 export class ContactInputComponent implements OnInit {
 
+  @Input() contact!: IContact;
   @Output() contactToOutput: EventEmitter<IContact> = new EventEmitter<IContact>();
   @Output() backClicked = new EventEmitter<undefined>();
 
 
   // give values, without the equals, it will give undefined
-  contact: IContact = {
-    id: 0,
-    name: '',
-    address: '',
-    phoneNumber:'',
-    email:'',
-    birthday:new Date(),
-    dateMet: new Date(),
-    relation:'',
-    company:'',
-    notes:'',
-    date: new Date(),
-  }
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.contact)
   }
 
   onSave() {
     this.contactToOutput.emit(this.contact)
+    console.log(this.contact)
   }
 
   onBack() {
