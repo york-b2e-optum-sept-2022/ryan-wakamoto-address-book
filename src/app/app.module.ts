@@ -9,6 +9,7 @@ import {FormsModule} from "@angular/forms";
 import { ContactInputComponent } from './contact-input/contact-input.component';
 import { CreateContactComponent } from './create-contact/create-contact.component';
 import { SearchComponent } from './search/search.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SearchComponent } from './search/search.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

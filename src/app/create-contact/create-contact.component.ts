@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {DataService} from "../data.service";
 
 @Component({
   selector: 'app-create-contact',
@@ -7,15 +8,17 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class CreateContactComponent implements OnInit {
 
-  @Output() createClicked = new EventEmitter<undefined>();
 
-  constructor() { }
+  constructor(private dataService: DataService) {
+  }
 
   ngOnInit(): void {
   }
 
   createClick() {
-    this.createClicked.emit()
-    console.log('button clicked')
+    this.dataService.createClicked()
+    console.log(this.dataService)
   }
+
+
 }

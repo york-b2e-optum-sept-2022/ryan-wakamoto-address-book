@@ -21,8 +21,19 @@ export class AppComponent {
   ]
 
   constructor(private dataService: DataService) {
-    this.dataService.contactList
+    this.dataService.$createContact.subscribe(
+      (createContact ) => {
+        this.createContact = createContact;
+      }
+    )
+    this.dataService.$selectedContact.subscribe(
+      (selectedContact ) => {
+        this.selectedContact = selectedContact;
+      }
+    )
   }
+
+
   contactFound: boolean = false;
 
   onLogin(loginCreds: IAccount) {
@@ -40,42 +51,5 @@ export class AppComponent {
     this.contactFound = false;
   }
 
-  createClicked() {
-    this.createContact = true
-    this.selectedContact = {
-      id: "",
-      name: "",
-      address: "",
-      phoneNumber: "",
-      email: "",
-      birthday: new Date(),
-      dateMet: new Date(),
-      relation: "",
-      company: "",
-      notes: "",
-      date: new Date(),
-    }
-  }
-
-  onBack(event: any) {
-    this.createContact = false
-  }
-
-  onSave(contact: IContact){
-    if (contact.id === "") {
-      this.addContact(contact);
-    }
-    this.createContact = false;
-  }
-
-  addContact(contact: IContact) {
-    contact.id = uuidv4();
-    this.dataService.contactList.push(contact);
-    console.log(this.contactList)
-  }
-
-  onDelete(contactToDelete: IContact) {
-    this.dataService.contactList = this.dataService.contactList.filter(contact => contact.id !== contactToDelete.id)
-  }
 
 }

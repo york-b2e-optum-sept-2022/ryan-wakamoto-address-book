@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {IContact} from "../interfaces/iContact";
 import {IAccount} from "../interfaces/iaccount";
+import {DataService} from "../data.service";
 
 @Component({
   selector: 'app-contact-list',
@@ -9,15 +10,20 @@ import {IAccount} from "../interfaces/iaccount";
 })
 export class ContactListComponent implements OnInit, OnChanges {
 
-  @Input() list!: IContact[];
-  @Output() deleteContact = new EventEmitter<any>();
-  // @Input() filterPicked!: string;
+  list!: IContact[];
 
   displayList!: IContact[];
   searchText: string = ''
-  foundText = true;
 
-  constructor() { }
+  constructor(private dataService: DataService) {
+    this.list = this.dataService.getContactList()
+    this.dataService.$contactList.subscribe((contactList) => {
+      this.list = contactList;
+      this.displayList = [...this.list]
+      }
+
+    )
+  }
 
   ngOnInit(): void {
     this.displayList = [...this.list]
@@ -25,10 +31,6 @@ export class ContactListComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     this.displayList = [...this.list]
-  }
-
-  onDelete(contact: IContact){
-    this.deleteContact.emit(contact)
   }
 
   searchInput(searchText: string) {

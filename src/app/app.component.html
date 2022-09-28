@@ -7,22 +7,17 @@
 
   <app-create-contact
     *ngIf="createContact === false"
-    (createClicked)="createClicked()"
   ></app-create-contact>
 
   <app-contact-input
     *ngIf="createContact === true"
     [contact]="selectedContact"
-    (contactToOutput)="onSave($event)"
-    (backClicked)="onBack($event)"
   ></app-contact-input>
 
 
   <app-contact-list
     *ngIf="createContact === false"
-    [list]="contactList"
-    (deleteContact)="onDelete($event)">
-  </app-contact-list>
+ ></app-contact-list>
 
 </div>
 

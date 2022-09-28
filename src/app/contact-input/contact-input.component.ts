@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IContact} from "../interfaces/iContact";
+import {DataService} from "../data.service";
 
 @Component({
   selector: 'app-contact-input',
@@ -9,25 +10,28 @@ import {IContact} from "../interfaces/iContact";
 export class ContactInputComponent implements OnInit {
 
   @Input() contact!: IContact;
-  @Output() contactToOutput: EventEmitter<IContact> = new EventEmitter<IContact>();
-  @Output() backClicked = new EventEmitter<undefined>();
 
 
   // give values, without the equals, it will give undefined
 
-  constructor() { }
+  constructor(private dataService: DataService) {
+
+  }
 
   ngOnInit(): void {
-    console.log(this.contact)
+  }
+
+  ngOnDestroy() {
+
   }
 
   onSave() {
-    this.contactToOutput.emit(this.contact)
+    this.dataService.onSave(this.contact)
     console.log(this.contact)
   }
 
   onBack() {
-    this.backClicked.emit()
+    this.dataService.onBack()
     console.log('back clicked')
   }
 
